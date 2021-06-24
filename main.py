@@ -25,7 +25,7 @@ def submit(): #提交订单函数
         #time.sleep(1)
         time.sleep(10)
         html = browser.page_source
-        s = bs(html)
+        s = bs(html, 'html.parser')
         tar = s.find(id="ljgm")
         result = tar['title']
         
@@ -127,7 +127,7 @@ def watch(browser): #监控函数
         if(i>20):
             return False,"???"
         html = browser.page_source
-        s = bs(html)
+        s = bs(html, 'html.parser')
         #arrivalTime_cities ljgm
         #s.find(id="arrivalTime_cities")
         tar = s.find(id="ljgm")
@@ -138,7 +138,7 @@ def watch(browser): #监控函数
             continue
     
     print(datetime.datetime.now()," : ",result)
-    if(result=="已抢光"):
+    if (result == "已抢光" or "已售罄"):
         return False,result
     else:
         
